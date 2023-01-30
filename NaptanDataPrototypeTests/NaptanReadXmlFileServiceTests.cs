@@ -5,12 +5,12 @@ using NaptanDataPrototype.Models;
 
 namespace NaptanDataPrototypeTests;
 
-public class NaptanReadXmlFileTests
+public class NaptanReadXmlFileServiceTests
 {
     [Fact]
     public void GetEastingNorthingFromNaptaonStopPoint()
     {
-        var naptanXmlFile = new NaptonXmlFile();
+        var naptanXmlFile = new NaptonXmlFileService();
 
         NaptanModel naptonResponse = naptanXmlFile.GetLocation();
 

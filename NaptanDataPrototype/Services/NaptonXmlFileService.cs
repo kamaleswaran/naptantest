@@ -3,7 +3,7 @@ using NaptanDataPrototype.Models;
 
 namespace NaptanDataPrototype;
 
-public class NaptonXmlFile
+public class NaptonXmlFileService
 {
     public NaptanModel GetLocation()
     {

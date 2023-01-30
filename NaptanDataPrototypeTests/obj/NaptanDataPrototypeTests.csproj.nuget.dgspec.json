@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototypeTests/NaptanDataPrototypeTests.csproj": {}
+    "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototypeTests/NaptanDataPrototypeTests.csproj": {}
   },
   "projects": {
-    "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototype/NaptanDataPrototype.csproj": {
+    "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/NaptanDataPrototype.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototype/NaptanDataPrototype.csproj",
+        "projectUniqueName": "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/NaptanDataPrototype.csproj",
         "projectName": "NaptanDataPrototype",
-        "projectPath": "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototype/NaptanDataPrototype.csproj",
-        "packagesPath": "/Users/victoriakundu/.nuget/packages/",
-        "outputPath": "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototype/obj/",
+        "projectPath": "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/NaptanDataPrototype.csproj",
+        "packagesPath": "/Users/kamaleswaransangarapandian/.nuget/packages/",
+        "outputPath": "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/obj/",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/Users/victoriakundu/.nuget/NuGet/NuGet.Config"
+          "/Users/kamaleswaransangarapandian/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -43,8 +46,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -53,21 +55,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototypeTests/NaptanDataPrototypeTests.csproj": {
+    "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototypeTests/NaptanDataPrototypeTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototypeTests/NaptanDataPrototypeTests.csproj",
+        "projectUniqueName": "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototypeTests/NaptanDataPrototypeTests.csproj",
         "projectName": "NaptanDataPrototypeTests",
-        "projectPath": "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototypeTests/NaptanDataPrototypeTests.csproj",
-        "packagesPath": "/Users/victoriakundu/.nuget/packages/",
-        "outputPath": "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototypeTests/obj/",
+        "projectPath": "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototypeTests/NaptanDataPrototypeTests.csproj",
+        "packagesPath": "/Users/kamaleswaransangarapandian/.nuget/packages/",
+        "outputPath": "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototypeTests/obj/",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/Users/victoriakundu/.nuget/NuGet/NuGet.Config"
+          "/Users/kamaleswaransangarapandian/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -79,8 +84,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototype/NaptanDataPrototype.csproj": {
-                "projectPath": "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototype/NaptanDataPrototype.csproj"
+              "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/NaptanDataPrototype.csproj": {
+                "projectPath": "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/NaptanDataPrototype.csproj"
               }
             }
           }
@@ -114,8 +119,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -124,7 +128,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
         }
       }
     }

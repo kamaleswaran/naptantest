@@ -4,6 +4,6 @@ using NaptanDataPrototype;
 
 Console.WriteLine("Hello, World!");
 
-var naptanData = new NaptonXmlFile();
+var naptanData = new NaptonXmlFileService();
 
 naptanData.GetLocation();
