@@ -1,0 +1,16 @@
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/bin/Debug/net6.0/NaptanDataPrototype
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/bin/Debug/net6.0/NaptanDataPrototype.deps.json
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/bin/Debug/net6.0/NaptanDataPrototype.runtimeconfig.json
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/bin/Debug/net6.0/NaptanDataPrototype.dll
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/bin/Debug/net6.0/NaptanDataPrototype.pdb
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/obj/Debug/net6.0/NaptanDataPrototype.csproj.AssemblyReference.cache
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/obj/Debug/net6.0/NaptanDataPrototype.GeneratedMSBuildEditorConfig.editorconfig
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/obj/Debug/net6.0/NaptanDataPrototype.AssemblyInfoInputs.cache
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/obj/Debug/net6.0/NaptanDataPrototype.AssemblyInfo.cs
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/obj/Debug/net6.0/NaptanDataPrototype.csproj.CoreCompileInputs.cache
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/obj/Debug/net6.0/NaptanDataPrototype.dll
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/obj/Debug/net6.0/refint/NaptanDataPrototype.dll
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/obj/Debug/net6.0/NaptanDataPrototype.pdb
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/obj/Debug/net6.0/NaptanDataPrototype.genruntimeconfig.cache
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/obj/Debug/net6.0/ref/NaptanDataPrototype.dll
+/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/bin/Debug/net6.0/Files/Naptan-oneStopPoint.xml
