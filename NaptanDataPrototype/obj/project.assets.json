@@ -8,23 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "/Users/kamaleswaransangarapandian/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "/Users/victoriakundu/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/NaptanDataPrototype.csproj",
+      "projectUniqueName": "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototype/NaptanDataPrototype.csproj",
       "projectName": "NaptanDataPrototype",
-      "projectPath": "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/NaptanDataPrototype.csproj",
-      "packagesPath": "/Users/kamaleswaransangarapandian/.nuget/packages/",
-      "outputPath": "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototype/obj/",
+      "projectPath": "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototype/NaptanDataPrototype.csproj",
+      "packagesPath": "/Users/victoriakundu/.nuget/packages/",
+      "outputPath": "/Users/victoriakundu/RiderProjects/naptantest/NaptanDataPrototype/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "/Users/kamaleswaransangarapandian/.nuget/NuGet/NuGet.Config"
+        "/Users/victoriakundu/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -53,7 +49,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -62,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
       }
     }
   }
