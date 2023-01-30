@@ -1,10 +1,11 @@
 ﻿using NaptanDataPrototype;
 using Xunit;
 using FluentAssertions;
+using NaptanDataPrototype.Models;
 
 namespace NaptanDataPrototypeTests;
 
-public class NaptanReadXmlFileTest
+public class NaptanReadXmlFileTests
 {
     [Fact]
     public void GetEastingNorthingFromNaptaonStopPoint()

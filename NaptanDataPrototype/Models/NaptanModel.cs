@@ -1,4 +1,4 @@
-namespace NaptanDataPrototype;
+namespace NaptanDataPrototype.Models;
 
 public class NaptanModel
 {

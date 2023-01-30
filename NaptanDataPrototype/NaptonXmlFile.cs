@@ -1,4 +1,5 @@
 using System.Xml;
+using NaptanDataPrototype.Models;
 
 namespace NaptanDataPrototype;
 
