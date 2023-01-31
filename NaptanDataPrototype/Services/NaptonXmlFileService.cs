@@ -17,12 +17,17 @@ public class NaptonXmlFileService
         var latitude = Convert.ToDouble(node.SelectSingleNode("Latitude").InnerText);
         var longitude = Convert.ToDouble(node.SelectSingleNode("Longitude").InnerText);
         
+        var places = 5;
+        var multiplier = Math.Pow(10, places);
+        
         return new NaptanModel
         {
             Easting = easting,
             Northing = northing,
             Latitude = latitude,
-            Longitude = longitude
+            Longitude = longitude,
+            TruncatedLatitude = Math.Truncate(latitude * multiplier) / multiplier,
+            TruncatedLongitude = Math.Truncate(longitude * multiplier) / multiplier
         };
     }
 }
