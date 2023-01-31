@@ -18,6 +18,5 @@ public class OsToLatLonServiceTests
 
         location?.Latitude.Should().Be(51.32021);
         location?.Longitude.Should().Be(-0.59652);
-
     }
 }
