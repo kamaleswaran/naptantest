@@ -1,5 +1,7 @@
 using FluentAssertions;
 using NaptanDataPrototype;
+using NaptanDataPrototype.Models;
+using NaptanDataPrototype.Services;
 using Xunit;
 
 namespace NaptanDataPrototypeTests;

@@ -1,7 +1,7 @@
 using System.Xml;
 using NaptanDataPrototype.Models;
 
-namespace NaptanDataPrototype;
+namespace NaptanDataPrototype.Services;
 
 public class NaptonXmlFileService
 {

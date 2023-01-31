@@ -2,6 +2,7 @@
 
 using System.Xml.Linq;
 using NaptanDataPrototype;
+using NaptanDataPrototype.Services;
 
 Console.WriteLine("Hello, World!");
 
