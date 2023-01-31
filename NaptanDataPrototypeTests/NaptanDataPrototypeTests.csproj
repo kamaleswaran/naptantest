@@ -16,4 +16,8 @@
       <ProjectReference Include="..\NaptanDataPrototype\NaptanDataPrototype.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="obj" />
+    </ItemGroup>
+
 </Project>
