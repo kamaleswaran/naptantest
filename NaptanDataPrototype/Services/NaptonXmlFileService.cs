@@ -12,8 +12,8 @@ public class NaptonXmlFileService
         
         XmlNode node = doc.SelectSingleNode("NaPTAN/StopPoint/Place/Location/Translation");
 
-        var easting = Convert.ToDouble(node.SelectSingleNode("Easting").InnerText);
-        var northing = Convert.ToDouble(node.SelectSingleNode("Northing").InnerText);
+        var easting = Convert.ToInt32(node.SelectSingleNode("Easting").InnerText);
+        var northing = Convert.ToInt32(node.SelectSingleNode("Northing").InnerText);
         var latitude = Convert.ToDouble(node.SelectSingleNode("Latitude").InnerText);
         var longitude = Convert.ToDouble(node.SelectSingleNode("Longitude").InnerText);
         
