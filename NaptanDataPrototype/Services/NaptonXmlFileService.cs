@@ -1,4 +1,6 @@
 using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using NaptanDataPrototype.Models;
 
 namespace NaptanDataPrototype.Services;
@@ -7,15 +9,19 @@ public class NaptonXmlFileService
 {
     public NaptanModel GetLocation()
     {
-        var doc = new XmlDocument();
-        doc.Load(@"./Files/Naptan-oneStopPoint.xml");
+        XmlTextReader reader = new XmlTextReader(@"./Files/Naptan-oneStopPoint.xml");
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.Load(reader);
         
-        XmlNode node = doc.SelectSingleNode("NaPTAN/StopPoint/Place/Location/Translation");
+        XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
+        nsmgr.AddNamespace("ns", xmlDoc.DocumentElement.NamespaceURI);
 
-        var easting = Convert.ToInt32(node.SelectSingleNode("Easting").InnerText);
-        var northing = Convert.ToInt32(node.SelectSingleNode("Northing").InnerText);
-        var latitude = Convert.ToDouble(node.SelectSingleNode("Latitude").InnerText);
-        var longitude = Convert.ToDouble(node.SelectSingleNode("Longitude").InnerText);
+        XmlNode node = xmlDoc.SelectSingleNode("/ns:NaPTAN/ns:StopPoint/ns:Place/ns:Location/ns:Translation", nsmgr);
+        
+        var easting = Convert.ToInt32(node["Easting"].InnerText);
+        var northing = Convert.ToInt32(node["Northing"].InnerText);
+        var latitude = Convert.ToDouble(node["Latitude"].InnerText);
+        var longitude = Convert.ToDouble(node["Longitude"].InnerText);
         
         var places = 5;
         var multiplier = Math.Pow(10, places);
@@ -29,5 +35,15 @@ public class NaptonXmlFileService
             TruncatedLatitude = Math.Truncate(latitude * multiplier) / multiplier,
             TruncatedLongitude = Math.Truncate(longitude * multiplier) / multiplier
         };
+        
+        
+        // XmlReader reader = XmlReader.Create(@"./Files/Naptan-oneStopPoint.xml");
+        // XElement root = XElement.Load(reader);
+        // XmlNameTable nameTable = reader.NameTable;
+        // XmlNamespaceManager namespaceManager = new XmlNamespaceManager(nameTable);
+        // namespaceManager.AddNamespace("", "http://www.naptan.org.uk/");
+        // IEnumerable<XElement> list1 = root.XPathSelectElements("StopPoint/Place/Location/Translation", namespaceManager);
+        //
+        // return null;
     }
 }
