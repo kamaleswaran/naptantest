@@ -3,7 +3,7 @@ using NaptanDataPrototype.Services;
 
 var naptanData = new NaptonXmlFileService();
 
-var xmlLocation = naptanData.GetLocation();
+var xmlLocation = naptanData.GetLocation(@"./Files/Naptan-oneStopPoint.xml");
 
 var bng2latlongService = new OsToLatLonService();
 

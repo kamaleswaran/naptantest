@@ -7,16 +7,16 @@ namespace NaptanDataPrototype.Services;
 
 public class NaptonXmlFileService
 {
-    public NaptanModel GetLocation()
+    public NaptanModel GetLocation(string filepath)
     {
-        XmlTextReader reader = new XmlTextReader(@"./Files/Naptan-oneStopPoint.xml");
+        XmlTextReader reader = new XmlTextReader(filepath);
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(reader);
         
         XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
         nsmgr.AddNamespace("ns", xmlDoc.DocumentElement.NamespaceURI);
 
-        XmlNode node = xmlDoc.SelectSingleNode("/ns:NaPTAN/ns:StopPoint/ns:Place/ns:Location/ns:Translation", nsmgr);
+        XmlNode node = xmlDoc.SelectSingleNode("/ns:NaPTAN/ns:StopPoints/ns:StopPoint/ns:Place/ns:Location/ns:Translation", nsmgr);
         
         var easting = Convert.ToInt32(node["Easting"].InnerText);
         var northing = Convert.ToInt32(node["Northing"].InnerText);

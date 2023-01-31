@@ -12,7 +12,7 @@ public class NaptanReadXmlFileServiceTests
     {
         var naptanXmlFile = new NaptonXmlFileService();
 
-        NaptanModel naptonResponse = naptanXmlFile.GetLocation();
+        NaptanModel naptonResponse = naptanXmlFile.GetLocation(@"./Files/Naptan-oneStopPoint.xml");
 
         naptonResponse.Easting.Should().Be(497900);
         naptonResponse.Northing.Should().Be(158836);
