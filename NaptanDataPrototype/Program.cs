@@ -14,35 +14,42 @@ var misMatchLongitudeCount = 0;
 
 var stopWatch = new Stopwatch();
 stopWatch.Start();
-foreach (var xmlLocation in xmlLocations)
+
+var parallelOptions = new ParallelOptions {MaxDegreeOfParallelism = 25 };
+double acceptableDifference = 0.00003;
+
+await Parallel.ForEachAsync(xmlLocations, parallelOptions, async (xmlLocation, token) =>
 {
     var locationService = await bng2latlongService.GetLatitudeLongitude(xmlLocation.Easting, xmlLocation.Northing);
 
-    if (!Functions.IsMatching(locationService.Latitude, xmlLocation.TruncatedLatitude, 0.00005)
-        || !Functions.IsMatching(locationService.Longitude, xmlLocation.TruncatedLongitude, 0.00005))
+    if (!Functions.IsMatching(locationService.Latitude, xmlLocation.Latitude, acceptableDifference)
+        || !Functions.IsMatching(locationService.Longitude, xmlLocation.Longitude, acceptableDifference))
     {
         misMatchCount++;
         
-        if(!Functions.IsMatching(locationService.Latitude, xmlLocation.TruncatedLatitude))
+        if(!Functions.IsMatching(locationService.Latitude, xmlLocation.Latitude, acceptableDifference))
         {
             misMatchLatitudeCount++;
             Console.WriteLine("MisMatching latitude");
+            Console.WriteLine($"XML Latitude value = {xmlLocation.Longitude}, Converted Latitude = {locationService.Latitude}");
         }
     
-        if(!Functions.IsMatching(locationService.Longitude, xmlLocation.TruncatedLongitude, 0.00000))
+        if(!Functions.IsMatching(locationService.Longitude, xmlLocation.Latitude, acceptableDifference))
         {
             misMatchLongitudeCount++;
             Console.WriteLine("MisMatching longitude");
+            Console.WriteLine($"XML Longitude value = {xmlLocation.Longitude}, Converted Longitude = {locationService.Longitude}");
         }
     }
-    else
-    {
-        Console.WriteLine("Matching lat/long");
-    }
+    // else
+    // {
+    //     Console.WriteLine("Matching lat/long");
+    // }
     
     // Console.WriteLine($"XML Latitude value = {xmlLocation.TruncatedLatitude}, Converted Latitude = {locationService.Latitude}");
     // Console.WriteLine($"XML Longitude value = {xmlLocation.TruncatedLongitude}, Converted Longitude = {locationService.Longitude}");
-}
+});
+
 stopWatch.Stop();
 
 Console.WriteLine($"Total count = {xmlLocations.Count}");

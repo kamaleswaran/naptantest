@@ -18,8 +18,6 @@ public class NaptanReadXmlFileServiceTests
         naptonResponse[0].Northing.Should().Be(158836);
         naptonResponse[0].Latitude.Should().Be(51.3202179);
         naptonResponse[0].Longitude.Should().Be(-0.5965128);
-        naptonResponse[0].TruncatedLatitude.Should().Be(51.32021);
-        naptonResponse[0].TruncatedLongitude.Should().Be(-0.59651);
     }
     
     [Fact]

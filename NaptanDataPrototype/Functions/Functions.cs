@@ -2,17 +2,32 @@ namespace NaptanDataPrototype.Functions;
 
 public class Functions
 {
-    public static bool IsMatching(double locationServiceValue, double xmlValue, double acceptedDifference = 0.00000)
+    public static bool IsMatching(double value1, double value2, double acceptableDifference = 0.00000)
     {
-        double val1 = locationServiceValue;
-        double val2 = xmlValue;
+        // var places = 5;
+        // var multiplier = Math.Pow(10, places);
+        // var truncatedLocationServiceValue = Math.Truncate(locationServiceValue * multiplier) / multiplier;
+        // var truncatedXmlValue = Math.Truncate(xmlValue * multiplier) / multiplier;
 
-        if (locationServiceValue < xmlValue)
+        // var findDecimal = value1.ToString().IndexOf('.');
+        // var test = value1.ToString().Substring(0, findDecimal + 6);
+
+        var val1 = value1;
+        var val2 = value2;
+
+        if (value1 < value2)
         {
-            val1 = xmlValue;
-            val2 = locationServiceValue;
+            val1 = value2;
+            val2 = value1;
         }
         
-        return val1 - val2 <= acceptedDifference;
-    } 
+        return Math.Round((val1 - val2), 4) <= acceptableDifference;
+    }
+
+    private static double TruncateValue(double value)
+    {
+        var truncatedValue = value.ToString().Substring(0, 8);
+
+        return Convert.ToDouble(truncatedValue);
+    }
 }

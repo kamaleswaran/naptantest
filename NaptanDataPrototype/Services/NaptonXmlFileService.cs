@@ -18,8 +18,6 @@ public class NaptonXmlFileService
 
         XmlNodeList stopPoints = xmlDoc.SelectNodes("/ns:NaPTAN/ns:StopPoints/ns:StopPoint", nsmgr);
 
-        var places = 5;
-        var multiplier = Math.Pow(10, places);
         var naptanModels = new List<NaptanModel>();
         
         foreach (XmlElement stopPoint in stopPoints)
@@ -35,9 +33,7 @@ public class NaptonXmlFileService
                 Easting = easting,
                 Northing = northing,
                 Latitude = latitude,
-                Longitude = longitude,
-                TruncatedLatitude = Math.Truncate(latitude * multiplier) / multiplier,
-                TruncatedLongitude = Math.Truncate(longitude * multiplier) / multiplier
+                Longitude = longitude
             };
             
             naptanModels.Add(naptanModel);
