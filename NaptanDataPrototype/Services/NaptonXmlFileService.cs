@@ -7,7 +7,7 @@ namespace NaptanDataPrototype.Services;
 
 public class NaptonXmlFileService
 {
-    public NaptanModel GetLocation(string filepath)
+    public List<NaptanModel> GetLocation(string filepath)
     {
         XmlTextReader reader = new XmlTextReader(filepath);
         XmlDocument xmlDoc = new XmlDocument();
@@ -16,34 +16,33 @@ public class NaptonXmlFileService
         XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
         nsmgr.AddNamespace("ns", xmlDoc.DocumentElement.NamespaceURI);
 
-        XmlNode node = xmlDoc.SelectSingleNode("/ns:NaPTAN/ns:StopPoints/ns:StopPoint/ns:Place/ns:Location/ns:Translation", nsmgr);
-        
-        var easting = Convert.ToInt32(node["Easting"].InnerText);
-        var northing = Convert.ToInt32(node["Northing"].InnerText);
-        var latitude = Convert.ToDouble(node["Latitude"].InnerText);
-        var longitude = Convert.ToDouble(node["Longitude"].InnerText);
-        
+        XmlNodeList stopPoints = xmlDoc.SelectNodes("/ns:NaPTAN/ns:StopPoints/ns:StopPoint", nsmgr);
+
         var places = 5;
         var multiplier = Math.Pow(10, places);
+        var naptanModels = new List<NaptanModel>();
         
-        return new NaptanModel
+        foreach (XmlElement stopPoint in stopPoints)
         {
-            Easting = easting,
-            Northing = northing,
-            Latitude = latitude,
-            Longitude = longitude,
-            TruncatedLatitude = Math.Truncate(latitude * multiplier) / multiplier,
-            TruncatedLongitude = Math.Truncate(longitude * multiplier) / multiplier
-        };
+            var locationNode = stopPoint.GetElementsByTagName("Translation")[0];
+            var easting = Convert.ToInt32(locationNode["Easting"].InnerText);
+            var northing = Convert.ToInt32(locationNode["Northing"].InnerText);
+            var latitude = Convert.ToDouble(locationNode["Latitude"].InnerText);
+            var longitude = Convert.ToDouble(locationNode["Longitude"].InnerText);
+            
+            var naptanModel = new NaptanModel
+            {
+                Easting = easting,
+                Northing = northing,
+                Latitude = latitude,
+                Longitude = longitude,
+                TruncatedLatitude = Math.Truncate(latitude * multiplier) / multiplier,
+                TruncatedLongitude = Math.Truncate(longitude * multiplier) / multiplier
+            };
+            
+            naptanModels.Add(naptanModel);
+        }
         
-        
-        // XmlReader reader = XmlReader.Create(@"./Files/Naptan-oneStopPoint.xml");
-        // XElement root = XElement.Load(reader);
-        // XmlNameTable nameTable = reader.NameTable;
-        // XmlNamespaceManager namespaceManager = new XmlNamespaceManager(nameTable);
-        // namespaceManager.AddNamespace("", "http://www.naptan.org.uk/");
-        // IEnumerable<XElement> list1 = root.XPathSelectElements("StopPoint/Place/Location/Translation", namespaceManager);
-        //
-        // return null;
+        return naptanModels;
     }
 }

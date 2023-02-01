@@ -7,10 +7,10 @@ var xmlLocation = naptanData.GetLocation(@"./Files/Naptan-oneStopPoint.xml");
 
 var bng2latlongService = new OsToLatLonService();
 
-var locationService = await bng2latlongService.GetLatitudeLongitude(xmlLocation.Easting, xmlLocation.Northing);
+var locationService = await bng2latlongService.GetLatitudeLongitude(xmlLocation[0].Easting, xmlLocation[0].Northing);
 
-if(Functions.IsMatching(locationService.Latitude, xmlLocation.TruncatedLatitude)
-   && Functions.IsMatching(locationService.Longitude, xmlLocation.TruncatedLongitude, 0.00000)
+if(Functions.IsMatching(locationService.Latitude, xmlLocation[0].TruncatedLatitude)
+   && Functions.IsMatching(locationService.Longitude, xmlLocation[0].TruncatedLongitude, 0.00000)
    )
 {
     Console.WriteLine("Matching lat/long");

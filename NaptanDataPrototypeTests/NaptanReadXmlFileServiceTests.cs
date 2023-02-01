@@ -12,13 +12,29 @@ public class NaptanReadXmlFileServiceTests
     {
         var naptanXmlFile = new NaptonXmlFileService();
 
-        NaptanModel naptonResponse = naptanXmlFile.GetLocation(@"./Files/Naptan-oneStopPoint.xml");
+        var naptonResponse = naptanXmlFile.GetLocation(@"./Files/Naptan-oneStopPoint.xml");
 
-        naptonResponse.Easting.Should().Be(497900);
-        naptonResponse.Northing.Should().Be(158836);
-        naptonResponse.Latitude.Should().Be(51.3202179);
-        naptonResponse.Longitude.Should().Be(-0.5965128);
-        naptonResponse.TruncatedLatitude.Should().Be(51.32021);
-        naptonResponse.TruncatedLongitude.Should().Be(-0.59651);
+        naptonResponse[0].Easting.Should().Be(497900);
+        naptonResponse[0].Northing.Should().Be(158836);
+        naptonResponse[0].Latitude.Should().Be(51.3202179);
+        naptonResponse[0].Longitude.Should().Be(-0.5965128);
+        naptonResponse[0].TruncatedLatitude.Should().Be(51.32021);
+        naptonResponse[0].TruncatedLongitude.Should().Be(-0.59651);
+    }
+    
+    [Fact]
+    public void GetEastingNorthingFromNaptaonStopPoint2()
+    {
+        var naptanXmlFile = new NaptonXmlFileService();
+
+        var results = naptanXmlFile.GetLocation(@"./Files/Brighton.xml");
+
+        results.Count.Should().BeGreaterThan(1);
+
+        foreach (var item in results)
+        {
+            item.Easting.Should().BeGreaterThan(0);
+            item.Northing.Should().BeGreaterThan(0);    
+        }
     }
 }
