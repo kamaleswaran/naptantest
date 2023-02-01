@@ -4,7 +4,10 @@ using NaptanDataPrototype.Services;
 
 var naptanData = new NaptonXmlFileService();
 
-var xmlLocations = naptanData.GetLocation(@"./Files/Brighton.xml");
+Console.WriteLine("Processing xml file locations...");
+var xmlLocations = naptanData.GetLocation(@"./Files/NaPTAN.xml");
+
+Console.WriteLine("Loaded xml file locations");
 
 var bng2latlongService = new OsToLatLonService();
 
@@ -15,12 +18,18 @@ var misMatchLongitudeCount = 0;
 var stopWatch = new Stopwatch();
 stopWatch.Start();
 
-var parallelOptions = new ParallelOptions {MaxDegreeOfParallelism = 25 };
+//var parallelOptions = new ParallelOptions {MaxDegreeOfParallelism = 25 };
 double acceptableDifference = 0.00001;
 
-await Parallel.ForEachAsync(xmlLocations, parallelOptions, async (xmlLocation, token) =>
+Console.WriteLine($"Total xmlLocations count = {xmlLocations.Count}");
+
+await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
 {
+    Console.WriteLine($"Running.... {stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s:{stopWatch.ElapsedMilliseconds}ms");
     var locationService = await bng2latlongService.GetLatitudeLongitude(xmlLocation.Easting, xmlLocation.Northing);
+
+    if (locationService == null)
+        return;
 
     if (!Functions.IsMatchingValues(locationService.Latitude, xmlLocation.Latitude, acceptableDifference)
         || !Functions.IsMatchingValues(locationService.Longitude, xmlLocation.Longitude, acceptableDifference))
@@ -31,7 +40,7 @@ await Parallel.ForEachAsync(xmlLocations, parallelOptions, async (xmlLocation, t
         {
             misMatchLatitudeCount++;
             Console.WriteLine("MisMatching latitude");
-            Console.WriteLine($"XML Latitude value = {xmlLocation.Longitude}, Converted Latitude = {locationService.Latitude}");
+            Console.WriteLine($"XML Latitude value = {xmlLocation.Latitude}, Converted Latitude = {locationService.Latitude}");
         }
     
         if(!Functions.IsMatchingValues(locationService.Longitude, xmlLocation.Latitude, acceptableDifference))

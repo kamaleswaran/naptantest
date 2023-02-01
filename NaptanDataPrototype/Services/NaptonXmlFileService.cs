@@ -1,6 +1,5 @@
+using System.Diagnostics;
 using System.Xml;
-using System.Xml.Linq;
-using System.Xml.XPath;
 using NaptanDataPrototype.Models;
 
 namespace NaptanDataPrototype.Services;
@@ -9,9 +8,14 @@ public class NaptonXmlFileService
 {
     public List<NaptanModel> GetLocation(string filepath)
     {
+        var stopWatch = new Stopwatch();
+        stopWatch.Start();
+        
         XmlTextReader reader = new XmlTextReader(filepath);
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(reader);
+        
+        Console.WriteLine("Xml file loaded...");
         
         XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
         nsmgr.AddNamespace("ns", xmlDoc.DocumentElement.NamespaceURI);
@@ -20,14 +24,26 @@ public class NaptonXmlFileService
 
         var naptanModels = new List<NaptanModel>();
         
-        foreach (XmlElement stopPoint in stopPoints)
+        //foreach (XmlElement stopPoint in stopPoints)
+        Parallel.ForEach(stopPoints.Cast<XmlElement>(), stopPoint =>
         {
+            Console.WriteLine($"Processing xml elements.... " +
+                              $"{stopWatch.Elapsed.Hours}h:" +
+                              $"{stopWatch.Elapsed.Minutes}m:" +
+                              $"{stopWatch.Elapsed.Seconds}s:" +
+                              $"{stopWatch.ElapsedMilliseconds}ms");
+
             var locationNode = stopPoint.GetElementsByTagName("Translation")[0];
+            if (locationNode == null)
+            {
+                return;
+            }
+            
             var easting = Convert.ToInt32(locationNode["Easting"].InnerText);
             var northing = Convert.ToInt32(locationNode["Northing"].InnerText);
             var latitude = Convert.ToDouble(locationNode["Latitude"].InnerText);
             var longitude = Convert.ToDouble(locationNode["Longitude"].InnerText);
-            
+
             var naptanModel = new NaptanModel
             {
                 Easting = easting,
@@ -35,9 +51,12 @@ public class NaptonXmlFileService
                 Latitude = latitude,
                 Longitude = longitude
             };
-            
+
             naptanModels.Add(naptanModel);
-        }
+        });
+        
+        stopWatch.Stop();
+        Console.WriteLine($"{stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s");
         
         return naptanModels;
     }

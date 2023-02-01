@@ -7,14 +7,24 @@ public class OsToLatLonService
 {
     public async Task<LocationModel?> GetLatitudeLongitude(int easting, int northing)
     {
-        var url = $"https://api.getthedata.com/bng2latlong/{easting}/{northing}";
-        
-        var httpClient = new HttpClient();
+        var exceptionCount = 0;
+        try
+        {
+            var url = $"https://api.getthedata.com/bng2latlong/{easting}/{northing}";
 
-        var response = await httpClient.GetStringAsync(url);
+            using var httpClient = new HttpClient();
+            var response = await httpClient.GetStringAsync(url);
 
-        var jsonSerializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var jsonSerializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        return JsonSerializer.Deserialize<LocationModel>(response, jsonSerializerOptions);
+            return JsonSerializer.Deserialize<LocationModel>(response, jsonSerializerOptions);
+        }
+        catch (Exception exception)
+        {
+            exceptionCount++;
+            Console.WriteLine($"Exception count = {exceptionCount}");
+            Console.WriteLine(exception);
+            return null;
+        }
     }
 }
