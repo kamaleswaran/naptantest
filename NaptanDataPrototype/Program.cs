@@ -41,13 +41,6 @@ await Parallel.ForEachAsync(xmlLocations, parallelOptions, async (xmlLocation, t
             Console.WriteLine($"XML Longitude value = {xmlLocation.Longitude}, Converted Longitude = {locationService.Longitude}");
         }
     }
-    // else
-    // {
-    //     Console.WriteLine("Matching lat/long");
-    // }
-    
-    // Console.WriteLine($"XML Latitude value = {xmlLocation.TruncatedLatitude}, Converted Latitude = {locationService.Latitude}");
-    // Console.WriteLine($"XML Longitude value = {xmlLocation.TruncatedLongitude}, Converted Longitude = {locationService.Longitude}");
 });
 
 stopWatch.Stop();
