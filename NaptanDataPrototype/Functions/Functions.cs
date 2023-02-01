@@ -2,7 +2,7 @@ namespace NaptanDataPrototype.Functions;
 
 public class Functions
 {
-    public static bool IsMatching(double value1, double value2, double acceptableDifference = 0.00000)
+    public static bool IsMatchingValues(double value1, double value2, double acceptableDifference = 0.00000)
     {
         var val1 = value1;
         var val2 = value2;

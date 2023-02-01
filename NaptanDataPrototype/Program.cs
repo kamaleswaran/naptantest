@@ -22,19 +22,19 @@ await Parallel.ForEachAsync(xmlLocations, parallelOptions, async (xmlLocation, t
 {
     var locationService = await bng2latlongService.GetLatitudeLongitude(xmlLocation.Easting, xmlLocation.Northing);
 
-    if (!Functions.IsMatching(locationService.Latitude, xmlLocation.Latitude, acceptableDifference)
-        || !Functions.IsMatching(locationService.Longitude, xmlLocation.Longitude, acceptableDifference))
+    if (!Functions.IsMatchingValues(locationService.Latitude, xmlLocation.Latitude, acceptableDifference)
+        || !Functions.IsMatchingValues(locationService.Longitude, xmlLocation.Longitude, acceptableDifference))
     {
         misMatchCount++;
         
-        if(!Functions.IsMatching(locationService.Latitude, xmlLocation.Latitude, acceptableDifference))
+        if(!Functions.IsMatchingValues(locationService.Latitude, xmlLocation.Latitude, acceptableDifference))
         {
             misMatchLatitudeCount++;
             Console.WriteLine("MisMatching latitude");
             Console.WriteLine($"XML Latitude value = {xmlLocation.Longitude}, Converted Latitude = {locationService.Latitude}");
         }
     
-        if(!Functions.IsMatching(locationService.Longitude, xmlLocation.Latitude, acceptableDifference))
+        if(!Functions.IsMatchingValues(locationService.Longitude, xmlLocation.Latitude, acceptableDifference))
         {
             misMatchLongitudeCount++;
             Console.WriteLine("MisMatching longitude");
