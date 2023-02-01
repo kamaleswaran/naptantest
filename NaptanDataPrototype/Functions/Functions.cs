@@ -21,7 +21,7 @@ public class Functions
             val2 = value1;
         }
         
-        return Math.Round((val1 - val2), 4) <= acceptableDifference;
+        return Math.Round((val1 - val2), 5) <= Math.Round(acceptableDifference, 5);
     }
 
     private static double TruncateValue(double value)

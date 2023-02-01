@@ -16,7 +16,7 @@ var stopWatch = new Stopwatch();
 stopWatch.Start();
 
 var parallelOptions = new ParallelOptions {MaxDegreeOfParallelism = 25 };
-double acceptableDifference = 0.00003;
+double acceptableDifference = 0.00001;
 
 await Parallel.ForEachAsync(xmlLocations, parallelOptions, async (xmlLocation, token) =>
 {
