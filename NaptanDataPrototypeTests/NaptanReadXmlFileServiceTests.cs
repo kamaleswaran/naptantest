@@ -21,7 +21,7 @@ public class NaptanReadXmlFileServiceTests
     }
     
     [Fact]
-    public void GetEastingNorthingFromNaptaonStopPoint2()
+    public void GetEastingNorthingFromNaptaonStopPointForBrighton()
     {
         var naptanXmlFile = new NaptonXmlFileService();
 
@@ -34,5 +34,15 @@ public class NaptanReadXmlFileServiceTests
             item.Easting.Should().BeGreaterThan(0);
             item.Northing.Should().BeGreaterThan(0);    
         }
+    }
+
+    [Fact]
+    public void ShouldGetAptcoCode()
+    {
+        var naptanXmlFile = new NaptonXmlFileService();
+
+        var naptonResponse = naptanXmlFile.GetLocation(@"./Files/Naptan-oneStopPoint.xml");
+
+        naptonResponse[0].AtcoCode.Should().Be(400);
     }
 }

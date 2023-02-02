@@ -43,9 +43,11 @@ public class NaptonXmlFileService
             var northing = Convert.ToInt32(locationNode["Northing"].InnerText);
             var latitude = Convert.ToDouble(locationNode["Latitude"].InnerText);
             var longitude = Convert.ToDouble(locationNode["Longitude"].InnerText);
+            var atcoCode = Convert.ToInt32(stopPoint["AtcoCode"].InnerText.Substring(0, 3));
 
             var naptanModel = new NaptanModel
             {
+                AtcoCode = atcoCode,
                 Easting = easting,
                 Northing = northing,
                 Latitude = latitude,
