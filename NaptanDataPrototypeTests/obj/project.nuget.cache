@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lZ58gLCHQQ9vlwRi9k+Xx54kUBPSMKbNPnvQSj3vQhxin5kJcrVYrjEaIKH7mjXfOT6xL1uS2ZVpOhcdMlfBbA==",
+  "dgSpecHash": "wkcEW3rTlxUWXYFV3VnmEu+Sp0aPdH1+kKyqxmbJaHFmKalptPk6DleNCdszPM3m0iaJXQHkhjDhaanrDEsqCg==",
   "success": true,
   "projectFilePath": "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototypeTests/NaptanDataPrototypeTests.csproj",
   "expectedPackageFiles": [
@@ -31,6 +31,8 @@
     "/Users/kamaleswaransangarapandian/.nuget/packages/runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl/4.3.0/runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "/Users/kamaleswaransangarapandian/.nuget/packages/runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl/4.3.0/runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "/Users/kamaleswaransangarapandian/.nuget/packages/runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0/runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "/Users/kamaleswaransangarapandian/.nuget/packages/serilog/2.10.0/serilog.2.10.0.nupkg.sha512",
+    "/Users/kamaleswaransangarapandian/.nuget/packages/serilog.sinks.file/5.0.0/serilog.sinks.file.5.0.0.nupkg.sha512",
     "/Users/kamaleswaransangarapandian/.nuget/packages/system.appcontext/4.3.0/system.appcontext.4.3.0.nupkg.sha512",
     "/Users/kamaleswaransangarapandian/.nuget/packages/system.buffers/4.3.0/system.buffers.4.3.0.nupkg.sha512",
     "/Users/kamaleswaransangarapandian/.nuget/packages/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",

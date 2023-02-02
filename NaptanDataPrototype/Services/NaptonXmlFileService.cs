@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Xml;
 using NaptanDataPrototype.Models;
+using Serilog;
 
 namespace NaptanDataPrototype.Services;
 
@@ -15,7 +16,7 @@ public class NaptonXmlFileService
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(reader);
         
-        Console.WriteLine("Xml file loaded...");
+        Log.Information("Xml file loaded...");
         
         XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
         nsmgr.AddNamespace("ns", xmlDoc.DocumentElement.NamespaceURI);
@@ -27,7 +28,7 @@ public class NaptonXmlFileService
         //foreach (XmlElement stopPoint in stopPoints)
         Parallel.ForEach(stopPoints.Cast<XmlElement>(), stopPoint =>
         {
-            Console.WriteLine($"Processing xml elements.... " +
+            Log.Information($"Processing xml elements.... " +
                               $"{stopWatch.Elapsed.Hours}h:" +
                               $"{stopWatch.Elapsed.Minutes}m:" +
                               $"{stopWatch.Elapsed.Seconds}s:" +
@@ -58,7 +59,7 @@ public class NaptonXmlFileService
         });
         
         stopWatch.Stop();
-        Console.WriteLine($"{stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s");
+        Log.Information($"{stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s");
         
         return naptanModels;
     }

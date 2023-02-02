@@ -1,13 +1,15 @@
 using System.Text.Json;
 using NaptanDataPrototype.Models;
+using Serilog;
 
 namespace NaptanDataPrototype.Services;
 
 public class OsToLatLonService
 {
+    int exceptionCount;
+   
     public async Task<LocationModel?> GetLatitudeLongitude(int easting, int northing)
     {
-        var exceptionCount = 0;
         try
         {
             var url = $"https://api.getthedata.com/bng2latlong/{easting}/{northing}";
@@ -22,8 +24,7 @@ public class OsToLatLonService
         catch (Exception exception)
         {
             exceptionCount++;
-            Console.WriteLine($"Exception count = {exceptionCount}");
-            Console.WriteLine(exception);
+            Log.Information($"Exception count = {exceptionCount}");
             return null;
         }
     }

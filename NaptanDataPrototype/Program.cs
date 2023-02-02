@@ -1,13 +1,18 @@
 ﻿using System.Diagnostics;
 using NaptanDataPrototype.Functions;
 using NaptanDataPrototype.Services;
+using Serilog;
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.File("logger.log")
+    .CreateLogger();
 
 var naptanData = new NaptonXmlFileService();
 
-Console.WriteLine("Processing xml file locations...");
+Log.Information("Processing xml file locations...");
 var xmlLocations = naptanData.GetLocation(@"./Files/Brighton.xml");
 
-Console.WriteLine("Loaded xml file locations");
+Log.Information("Loaded xml file locations");
 
 var bng2latlongService = new OsToLatLonService();
 
@@ -21,11 +26,11 @@ stopWatch.Start();
 //var parallelOptions = new ParallelOptions {MaxDegreeOfParallelism = 25 };
 double acceptableDifference = 0.00001;
 
-Console.WriteLine($"Total xmlLocations count = {xmlLocations.Count}");
+Log.Information($"Total xmlLocations count = {xmlLocations.Count}");
 
 await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
 {
-    Console.WriteLine($"Running.... {stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s:{stopWatch.ElapsedMilliseconds}ms");
+    Log.Information($"Running.... {stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s:{stopWatch.ElapsedMilliseconds}ms");
     var locationService = await bng2latlongService.GetLatitudeLongitude(xmlLocation.Easting, xmlLocation.Northing);
 
     if (locationService == null)
@@ -39,28 +44,28 @@ await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
         if(!Functions.IsMatchingValues(locationService.Latitude, xmlLocation.Latitude, acceptableDifference))
         {
             misMatchLatitudeCount++;
-            Console.WriteLine("MisMatching latitude");
-            Console.WriteLine($"XML Latitude value = {xmlLocation.Latitude}, Converted Latitude = {locationService.Latitude}");
+            Log.Information("MisMatching latitude");
+            Log.Information($"XML Latitude value = {xmlLocation.Latitude}, Converted Latitude = {locationService.Latitude}");
         }
     
         if(!Functions.IsMatchingValues(locationService.Longitude, xmlLocation.Latitude, acceptableDifference))
         {
             misMatchLongitudeCount++;
-            Console.WriteLine("MisMatching longitude");
-            Console.WriteLine($"XML Longitude value = {xmlLocation.Longitude}, Converted Longitude = {locationService.Longitude}");
+            Log.Information("MisMatching longitude");
+            Log.Information($"XML Longitude value = {xmlLocation.Longitude}, Converted Longitude = {locationService.Longitude}");
         }
     }
 });
 
 stopWatch.Stop();
 
-Console.WriteLine($"Total count = {xmlLocations.Count}");
+Log.Information($"Total count = {xmlLocations.Count}");
 
 foreach (var key in misMatchCountDictionary.Keys)
 {
-    Console.WriteLine($"Key: {key}. MismatchCount = {misMatchCountDictionary[key]}");
+    Log.Information($"Key: {key}. MismatchCount = {misMatchCountDictionary[key]}");
 }
 
-Console.WriteLine($"Mismatch Latitude count = {misMatchLatitudeCount}");
-Console.WriteLine($"Mismatch Longitude count = {misMatchLongitudeCount}");
-Console.WriteLine($"Total time took to run the file = {stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s");
+Log.Information($"Mismatch Latitude count = {misMatchLatitudeCount}");
+Log.Information($"Mismatch Longitude count = {misMatchLongitudeCount}");
+Log.Information($"Total time took to run the file = {stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s");
