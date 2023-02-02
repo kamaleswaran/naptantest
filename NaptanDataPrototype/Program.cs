@@ -10,7 +10,7 @@ Log.Logger = new LoggerConfiguration()
 
 var naptanData = new NaptonXmlFileService();
 
-Log.Information("Processing xml file locations...");
+Log.Information("Processing xml file...");
 var xmlLocations = naptanData.GetLocation(@"./Files/NaPTAN.xml");
 
 Log.Information($"Xml file location loaded! Total xmlLocations count = {xmlLocations.Count}");
@@ -25,9 +25,16 @@ var stopWatch = new Stopwatch();
 stopWatch.Start();
 
 double acceptableDifference = 0.00001;
+int totalProcessed = 0;
+
+//object lockObject = new object();
 
 await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
 {
+    //lock (lockObject)
+    //{
+        totalProcessed++;
+    //}
     //Log.Information($"Running.... {stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s:{stopWatch.ElapsedMilliseconds}ms");
     var locationService = await bng2latlongService.GetLatitudeLongitude(xmlLocation.Easting, xmlLocation.Northing);
 
@@ -39,13 +46,13 @@ await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
     {
         misMatchCountDictionary = Functions.MismatchCountIncrement(misMatchCountDictionary, xmlLocation.AtcoCode);
         
-        if(!Functions.IsMatchingValues(locationService.Latitude, xmlLocation.Latitude, acceptableDifference))
+        if(!Functions.IsMatchingValues(xmlLocation.Latitude, locationService.Latitude, acceptableDifference))
         {
             misMatchLatitudeCount = Functions.MismatchCountIncrement(misMatchLatitudeCount, xmlLocation.AtcoCode);
             Log.Information($"MisMatching latitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Latitude value = {xmlLocation.Latitude}, Converted Latitude = {locationService.Latitude}");
         }
     
-        if(!Functions.IsMatchingValues(locationService.Longitude, xmlLocation.Latitude, acceptableDifference))
+        if(!Functions.IsMatchingValues(xmlLocation.Longitude, locationService.Longitude, acceptableDifference))
         {
             misMatchLongitudeCount = Functions.MismatchCountIncrement(misMatchLongitudeCount, xmlLocation.AtcoCode);
             Log.Information($"MisMatching longitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Longitude value = {xmlLocation.Longitude}, Converted Longitude = {locationService.Longitude}");
@@ -56,6 +63,7 @@ await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
 stopWatch.Stop();
 
 Log.Information($"Total count = {xmlLocations.Count}");
+Log.Information($"Total processed count = {totalProcessed}");
 
 foreach (var key in misMatchCountDictionary.Keys)
 {

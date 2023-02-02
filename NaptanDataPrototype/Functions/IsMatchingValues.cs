@@ -12,7 +12,10 @@ public static partial class Functions
             val1 = value2;
             val2 = value1;
         }
+
+        val1 = Math.Round(val1, 5);
+        val2 = Math.Round(val2, 5);
         
-        return Math.Round((val1 - val2), 5) <= Math.Round(acceptableDifference, 5);
+        return Math.Round(val1 - val2, 5) <= Math.Round(acceptableDifference, 5);
     }
 }
