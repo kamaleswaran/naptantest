@@ -28,11 +28,11 @@ public class NaptonXmlFileService
         //foreach (XmlElement stopPoint in stopPoints)
         Parallel.ForEach(stopPoints.Cast<XmlElement>(), stopPoint =>
         {
-            Log.Information($"Processing xml elements.... " +
-                              $"{stopWatch.Elapsed.Hours}h:" +
-                              $"{stopWatch.Elapsed.Minutes}m:" +
-                              $"{stopWatch.Elapsed.Seconds}s:" +
-                              $"{stopWatch.ElapsedMilliseconds}ms");
+            // Log.Information($"Processing xml elements.... " +
+            //                   $"{stopWatch.Elapsed.Hours}h:" +
+            //                   $"{stopWatch.Elapsed.Minutes}m:" +
+            //                   $"{stopWatch.Elapsed.Seconds}s:" +
+            //                   $"{stopWatch.ElapsedMilliseconds}ms");
 
             var locationNode = stopPoint.GetElementsByTagName("Translation")[0];
             if (locationNode == null)

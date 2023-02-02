@@ -5,12 +5,13 @@ using Serilog;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.File("logger.log")
+    .WriteTo.Console()
     .CreateLogger();
 
 var naptanData = new NaptonXmlFileService();
 
 Log.Information("Processing xml file locations...");
-var xmlLocations = naptanData.GetLocation(@"./Files/Brighton.xml");
+var xmlLocations = naptanData.GetLocation(@"./Files/NaPTAN.xml");
 
 Log.Information("Loaded xml file locations");
 
@@ -30,7 +31,7 @@ Log.Information($"Total xmlLocations count = {xmlLocations.Count}");
 
 await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
 {
-    Log.Information($"Running.... {stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s:{stopWatch.ElapsedMilliseconds}ms");
+    //Log.Information($"Running.... {stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s:{stopWatch.ElapsedMilliseconds}ms");
     var locationService = await bng2latlongService.GetLatitudeLongitude(xmlLocation.Easting, xmlLocation.Northing);
 
     if (locationService == null)
