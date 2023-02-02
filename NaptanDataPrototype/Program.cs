@@ -11,7 +11,7 @@ Console.WriteLine("Loaded xml file locations");
 
 var bng2latlongService = new OsToLatLonService();
 
-var misMatchCount = 0;
+var misMatchCountDictionary = new Dictionary<int, int>();
 var misMatchLatitudeCount = 0;
 var misMatchLongitudeCount = 0;
 
@@ -34,7 +34,14 @@ await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
     if (!Functions.IsMatchingValues(locationService.Latitude, xmlLocation.Latitude, acceptableDifference)
         || !Functions.IsMatchingValues(locationService.Longitude, xmlLocation.Longitude, acceptableDifference))
     {
-        misMatchCount++;
+        if (misMatchCountDictionary.ContainsKey(xmlLocation.AtcoCode))
+        {
+            misMatchCountDictionary[xmlLocation.AtcoCode] = + 1;
+        }
+        else
+        {
+            misMatchCountDictionary.Add(xmlLocation.AtcoCode, 1);
+        }
         
         if(!Functions.IsMatchingValues(locationService.Latitude, xmlLocation.Latitude, acceptableDifference))
         {
@@ -55,7 +62,7 @@ await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
 stopWatch.Stop();
 
 Console.WriteLine($"Total count = {xmlLocations.Count}");
-Console.WriteLine($"Mismatch count = {misMatchCount}");
+//Console.WriteLine($"Mismatch count = {misMatchCount}");
 Console.WriteLine($"Mismatch Latitude count = {misMatchLatitudeCount}");
 Console.WriteLine($"Mismatch Longitude count = {misMatchLongitudeCount}");
 Console.WriteLine($"Total time took to run the file = {stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s");

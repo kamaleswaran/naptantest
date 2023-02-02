@@ -1,6 +1,6 @@
 namespace NaptanDataPrototype.Functions;
 
-public class Functions
+public static partial class Functions
 {
     public static bool IsMatchingValues(double value1, double value2, double acceptableDifference = 0.00000)
     {
