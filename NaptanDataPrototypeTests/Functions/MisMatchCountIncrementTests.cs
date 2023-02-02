@@ -3,7 +3,7 @@ using Xunit;
 
 namespace NaptanDataPrototypeTests.Functions;
 
-public class MisMatcjCountIncrementTests
+public class MisMatchCountIncrementTests
 {
     [Fact]
     public void ShouldAddKeyToDictionary()
