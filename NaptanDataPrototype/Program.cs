@@ -13,21 +13,18 @@ var naptanData = new NaptonXmlFileService();
 Log.Information("Processing xml file locations...");
 var xmlLocations = naptanData.GetLocation(@"./Files/NaPTAN.xml");
 
-Log.Information("Loaded xml file locations");
+Log.Information($"Xml file location loaded! Total xmlLocations count = {xmlLocations.Count}");
 
 var bng2latlongService = new OsToLatLonService();
 
 IDictionary<int, int> misMatchCountDictionary = new Dictionary<int, int>();
-var misMatchLatitudeCount = 0;
-var misMatchLongitudeCount = 0;
+IDictionary<int, int> misMatchLatitudeCount = new Dictionary<int, int>();
+IDictionary<int, int> misMatchLongitudeCount = new Dictionary<int, int>();
 
 var stopWatch = new Stopwatch();
 stopWatch.Start();
 
-//var parallelOptions = new ParallelOptions {MaxDegreeOfParallelism = 25 };
 double acceptableDifference = 0.00001;
-
-Log.Information($"Total xmlLocations count = {xmlLocations.Count}");
 
 await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
 {
@@ -44,16 +41,14 @@ await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
         
         if(!Functions.IsMatchingValues(locationService.Latitude, xmlLocation.Latitude, acceptableDifference))
         {
-            misMatchLatitudeCount++;
-            Log.Information("MisMatching latitude");
-            Log.Information($"XML Latitude value = {xmlLocation.Latitude}, Converted Latitude = {locationService.Latitude}");
+            misMatchLatitudeCount = Functions.MismatchCountIncrement(misMatchLatitudeCount, xmlLocation.AtcoCode);
+            Log.Information($"MisMatching latitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Latitude value = {xmlLocation.Latitude}, Converted Latitude = {locationService.Latitude}");
         }
     
         if(!Functions.IsMatchingValues(locationService.Longitude, xmlLocation.Latitude, acceptableDifference))
         {
-            misMatchLongitudeCount++;
-            Log.Information("MisMatching longitude");
-            Log.Information($"XML Longitude value = {xmlLocation.Longitude}, Converted Longitude = {locationService.Longitude}");
+            misMatchLongitudeCount = Functions.MismatchCountIncrement(misMatchLongitudeCount, xmlLocation.AtcoCode);
+            Log.Information($"MisMatching longitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Longitude value = {xmlLocation.Longitude}, Converted Longitude = {locationService.Longitude}");
         }
     }
 });
@@ -67,6 +62,14 @@ foreach (var key in misMatchCountDictionary.Keys)
     Log.Information($"Key: {key}. MismatchCount = {misMatchCountDictionary[key]}");
 }
 
-Log.Information($"Mismatch Latitude count = {misMatchLatitudeCount}");
-Log.Information($"Mismatch Longitude count = {misMatchLongitudeCount}");
+foreach (var key in misMatchLatitudeCount.Keys)
+{
+    Log.Information($"Key: {key}. MismatchLatitudeCount = {misMatchLatitudeCount[key]}");
+}
+
+foreach (var key in misMatchLongitudeCount.Keys)
+{
+    Log.Information($"Key: {key}. MismatchLongitudeCount = {misMatchLongitudeCount[key]}");
+}
+
 Log.Information($"Total time took to run the file = {stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s");
