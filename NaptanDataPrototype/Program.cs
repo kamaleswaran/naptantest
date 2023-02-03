@@ -11,7 +11,7 @@ Log.Logger = new LoggerConfiguration()
 var naptanData = new NaptonXmlFileService();
 
 Log.Information("Processing xml file...");
-var xmlLocations = naptanData.GetLocation(@"./Files/Brighton.xml");
+var xmlLocations = naptanData.GetLocation(@"./Files/NaPTAN.xml");
 
 Log.Information($"Xml file location loaded! Total xmlLocations count = {xmlLocations.Count}");
 
@@ -34,6 +34,7 @@ await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
     //lock (lockObject)
     //{
         totalProcessed++;
+        Console.WriteLine(totalProcessed);
     //}
     //Log.Information($"Running.... {stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s:{stopWatch.ElapsedMilliseconds}ms");
     var locationService = await bng2latlongService.GetLatitudeLongitude(xmlLocation.Easting, xmlLocation.Northing);
