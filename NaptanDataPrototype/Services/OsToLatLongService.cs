@@ -4,10 +4,10 @@ using Serilog;
 
 namespace NaptanDataPrototype.Services;
 
-public class OsToLatLonService
+public class OsToLatLongService
 {
     private List<NaptanModel> cachedData;
-    public OsToLatLonService()
+    public OsToLatLongService()
     {
         var osData = new OsDataFromFile();
         cachedData = osData.GetLatitudeLongitude().Result;
@@ -25,6 +25,8 @@ public class OsToLatLonService
             {
                 return resultFromCachedData;
             }
+            
+            Log.Information("Cannot find result from cached data. Calling 3rd party api");
             
             var url = $"https://api.getthedata.com/bng2latlong/{easting}/{northing}";
 

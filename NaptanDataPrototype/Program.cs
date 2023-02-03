@@ -15,7 +15,7 @@ var xmlLocations = naptanData.GetLocation(@"./Files/NaPTAN.xml");
 
 Log.Information($"Xml file location loaded! Total xmlLocations count = {xmlLocations.Count}");
 
-var bng2latlongService = new OsToLatLonService();
+var bng2latlongService = new OsToLatLongService();
 
 IDictionary<int, int> misMatchCountDictionary = new Dictionary<int, int>();
 IDictionary<int, int> misMatchLatitudeCount = new Dictionary<int, int>();
@@ -46,14 +46,14 @@ await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
         {
             misMatchLatitudeCount = Functions.MismatchCountIncrement(misMatchLatitudeCount, xmlLocation.AtcoCode);
             Log.Information(
-                $"MisMatching latitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Latitude value = {xmlLocation.Latitude}, Converted Latitude = {locationService.Latitude}");
+                $"MisMatching latitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Latitude value = {xmlLocation.Latitude}, Latitude = {locationService.Latitude}");
         }
 
         if (!Functions.IsMatchingValues(xmlLocation.Longitude, locationService.Longitude, acceptableDifference))
         {
             misMatchLongitudeCount = Functions.MismatchCountIncrement(misMatchLongitudeCount, xmlLocation.AtcoCode);
             Log.Information(
-                $"MisMatching longitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Longitude value = {xmlLocation.Longitude}, Converted Longitude = {locationService.Longitude}");
+                $"MisMatching longitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Longitude value = {xmlLocation.Longitude}, Longitude = {locationService.Longitude}");
         }
     }
 });

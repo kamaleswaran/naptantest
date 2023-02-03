@@ -10,7 +10,7 @@ public class OsToLatLonServiceTests
     [Fact]
     public async Task ShouldConvertEastingNorthingToLatitudeLongitude()
     {
-        var sut = new OsToLatLonService();
+        var sut = new OsToLatLongService();
 
         var easting = 497900;
         var northing = 158836;
