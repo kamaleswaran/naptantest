@@ -4,7 +4,7 @@ namespace NaptanDataPrototype.Services;
 
 public class OsDataFromFile
 {
-    public List<NaptanModel> GetLatitudeLongitude()
+    public Task<List<NaptanModel>> GetLatitudeLongitude()
     {
         var locationData = File.ReadLines(@"./Files/OsUKData.csv");
 
@@ -12,7 +12,7 @@ public class OsDataFromFile
         
         foreach (var data in locationData)
         {
-            if (string.IsNullOrEmpty(data))
+            if (string.IsNullOrEmpty(data) || data.Split(',').Length < 4)
             {
                 continue;
             }
@@ -27,6 +27,6 @@ public class OsDataFromFile
             naptanModels.Add(naptanModel);
         }
 
-        return naptanModels;
+        return Task.FromResult(naptanModels);
     }
 }

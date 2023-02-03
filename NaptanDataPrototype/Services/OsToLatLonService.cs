@@ -10,7 +10,7 @@ public class OsToLatLonService
     public OsToLatLonService()
     {
         var osData = new OsDataFromFile();
-        cachedData = osData.GetLatitudeLongitude();
+        cachedData = osData.GetLatitudeLongitude().Result;
     }
     
     int exceptionCount;

@@ -7,10 +7,10 @@ namespace NaptanDataPrototypeTests;
 public class OsDataFromFileTests
 {
     [Fact]
-    public void ShouldReadValuesFromCachedData()
+    public async Task ShouldReadValuesFromCachedData()
     {
         var sut = new OsDataFromFile();
-        var response = sut.GetLatitudeLongitude();
+        var response = await sut.GetLatitudeLongitude();
 
         response.Should().NotBeNull();
     }
