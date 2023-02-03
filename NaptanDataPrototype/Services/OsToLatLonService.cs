@@ -6,13 +6,20 @@ namespace NaptanDataPrototype.Services;
 
 public class OsToLatLonService
 {
+    private List<NaptanModel> cachedData;
+    public OsToLatLonService()
+    {
+        var osData = new OsDataFromFile();
+        cachedData = osData.GetLatitudeLongitude();
+    }
+    
     int exceptionCount;
    
     public async Task<LocationModel?> GetLatitudeLongitude(int easting, int northing)
     {
         try
         {
-            var resultFromCachedData = await GetLatitudeLongitudeFromCachedData(easting, northing);
+            var resultFromCachedData = GetLatitudeLongitudeFromCachedData(easting, northing);
 
             if (resultFromCachedData != null)
             {
@@ -44,10 +51,9 @@ public class OsToLatLonService
         }
     }
 
-    private async Task<LocationModel> GetLatitudeLongitudeFromCachedData(int easting, int northing)
+    private LocationModel? GetLatitudeLongitudeFromCachedData(int easting, int northing)
     {
-        var osData = new OsDataFromFile();
-        var result = await osData.GetLatitudeLongitude(easting, northing);
+        var result = cachedData.FirstOrDefault(d => d.Easting == easting && d.Northing == northing);
 
         if (result == null)
         {
