@@ -1,9 +1,12 @@
 using NaptanDataPrototype.Models;
+using Serilog;
 
 namespace NaptanDataPrototype.Services;
 
 public class OsDataFromFile
 {
+    private int badRecordCount;
+    
     public Task<List<NaptanModel>> GetLatitudeLongitude()
     {
         var locationData = File.ReadLines(@"./Files/OsUKData.csv");
@@ -14,6 +17,7 @@ public class OsDataFromFile
         {
             if (string.IsNullOrEmpty(data) || data.Split(',').Length < 4)
             {
+                badRecordCount++;
                 continue;
             }
             var naptanModel = new NaptanModel
@@ -27,6 +31,7 @@ public class OsDataFromFile
             naptanModels.Add(naptanModel);
         }
 
+        Log.Information($"Bad records in cache files are: {badRecordCount}");
         return Task.FromResult(naptanModels);
     }
 }

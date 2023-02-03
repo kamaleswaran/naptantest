@@ -27,8 +27,8 @@ stopWatch.Start();
 double acceptableDifference = 0.00002;
 int totalProcessed = 0;
 
-//foreach (var xmlLocation in xmlLocations) //takes 1h 43m to complete
-await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
+foreach (var xmlLocation in xmlLocations)
+//await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
 {
     totalProcessed++;
     Console.WriteLine(totalProcessed);
@@ -56,7 +56,7 @@ await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
                 $"MisMatching longitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Longitude value = {xmlLocation.Longitude}, Longitude = {locationService.Longitude}");
         }
     }
-});
+}//);
 
 stopWatch.Stop();
 

@@ -11,6 +11,8 @@ public class OsToLatLongService
     {
         var osData = new OsDataFromFile();
         cachedData = osData.GetLatitudeLongitude().Result;
+        
+        Log.Information($"Total cached data count = {cachedData.Count}");
     }
     
     int exceptionCount;
@@ -26,7 +28,7 @@ public class OsToLatLongService
                 return resultFromCachedData;
             }
             
-            Log.Information("Cannot find result from cached data. Calling 3rd party api");
+            Log.Information($"Cannot find result from cached data. Easting: {easting} Northing: {northing} Calling 3rd party api");
             
             var url = $"https://api.getthedata.com/bng2latlong/{easting}/{northing}";
 
@@ -37,7 +39,7 @@ public class OsToLatLongService
             
             var locationModel = JsonSerializer.Deserialize<LocationModel>(response, jsonSerializerOptions);
             
-            string path = "OsUKData.csv";               
+            string path = "NewOsUKData.csv";               
             using(StreamWriter sw = File.AppendText(path))
             {
                 sw.WriteLine($"{easting},{northing},{locationModel.Latitude},{locationModel.Longitude}" );
