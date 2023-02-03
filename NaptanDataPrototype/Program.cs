@@ -11,7 +11,7 @@ Log.Logger = new LoggerConfiguration()
 var naptanData = new NaptonXmlFileService();
 
 Log.Information("Processing xml file...");
-var xmlLocations = naptanData.GetLocation(@"./Files/NaPTAN.xml");
+var xmlLocations = naptanData.GetLocation(@"./Files/Brighton.xml");
 
 Log.Information($"Xml file location loaded! Total xmlLocations count = {xmlLocations.Count}");
 
@@ -24,7 +24,7 @@ IDictionary<int, int> misMatchLongitudeCount = new Dictionary<int, int>();
 var stopWatch = new Stopwatch();
 stopWatch.Start();
 
-double acceptableDifference = 0.00001;
+double acceptableDifference = 0.00002;
 int totalProcessed = 0;
 
 //object lockObject = new object();
