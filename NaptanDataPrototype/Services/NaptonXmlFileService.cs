@@ -27,9 +27,14 @@ public class NaptonXmlFileService
         
         Log.Information($"Stoppoints count = {stopPoints.Count}");
 
-        foreach (XmlElement stopPoint in stopPoints)
+        foreach (XmlNode stopPoint in stopPoints)
         {
-            var locationNode = stopPoint.GetElementsByTagName("Translation")[0];
+            if (stopPoint.Attributes["Status"].Value.ToLower() != "active")
+            {
+                continue;
+            }
+            
+            var locationNode = stopPoint.SelectSingleNode("ns:Place/ns:Location/ns:Translation", nsmgr);
             if (locationNode == null)
             {
                 continue;
