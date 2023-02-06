@@ -45,4 +45,39 @@ public class NaptanReadXmlFileServiceTests
 
         naptonResponse[0].AtcoCode.Should().Be(400);
     }
+    
+    
+    [Fact]
+    public void ShouldGetAtcoCodeAndStopPointCounts()
+    {
+        var naptanXmlFile = new NaptonXmlFileService();
+
+        var naptonResponse = naptanXmlFile.GetLocation(@"./Files/Brighton.xml");
+
+        IDictionary<string, int> dict = new Dictionary<string, int>();
+
+        foreach (var item in naptonResponse)
+        {
+            var key = item.AtcoCode.ToString();
+            if (dict.ContainsKey(key))
+            {
+                dict[key] = dict[key] + 1;
+            }
+            else
+            {
+                dict.Add(key, 1);
+            }
+        }
+
+        dict.Keys.Count.Should().BeGreaterOrEqualTo(1);
+        
+        // string path = "atcoCounts.csv";
+        // using(StreamWriter sw = File.AppendText(path))
+        // {
+        //     foreach (var key in dict.Keys)
+        //     {
+        //         sw.WriteLine($"{key}, {dict[key]}" );
+        //     }
+        // }
+    }
 }

@@ -28,7 +28,6 @@ double acceptableDifference = 0.00002;
 int totalProcessed = 0;
 
 foreach (var xmlLocation in xmlLocations)
-//await Parallel.ForEachAsync(xmlLocations, async (xmlLocation, token) =>
 {
     totalProcessed++;
     Console.WriteLine(totalProcessed);
@@ -56,7 +55,7 @@ foreach (var xmlLocation in xmlLocations)
                 $"MisMatching longitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Longitude value = {xmlLocation.Longitude}, Longitude = {locationService.Longitude}");
         }
     }
-}//);
+}
 
 stopWatch.Stop();
 
