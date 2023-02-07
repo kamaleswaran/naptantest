@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using NaptanDataPrototype.Functions;
+using NaptanDataPrototype;
 using NaptanDataPrototype.Services;
 using Serilog;
 
@@ -11,70 +11,34 @@ Log.Logger = new LoggerConfiguration()
 var naptanData = new NaptonXmlFileService();
 
 Log.Information("Processing xml file...");
-var xmlLocations = naptanData.GetLocation(@"./Files/NaPTAN.xml");
+var xmlLocations = naptanData.GetLocation(@"./Files/Brighton.xml");
 
 Log.Information($"Xml file location loaded! Total xmlLocations count = {xmlLocations.Count}");
-
-var bng2latlongService = new OsToLatLongService();
-
-IDictionary<int, int> misMatchCountDictionary = new Dictionary<int, int>();
-IDictionary<int, int> misMatchLatitudeCount = new Dictionary<int, int>();
-IDictionary<int, int> misMatchLongitudeCount = new Dictionary<int, int>();
 
 var stopWatch = new Stopwatch();
 stopWatch.Start();
 
-double acceptableDifference = 0.00002;
-int totalProcessed = 0;
-
-foreach (var xmlLocation in xmlLocations)
-{
-    totalProcessed++;
-    Console.WriteLine(totalProcessed);
-    var locationService = await bng2latlongService.GetLatitudeLongitude(xmlLocation.Easting, xmlLocation.Northing);
-
-    if (locationService == null)
-        return;
-
-    if (!Functions.IsMatchingValues(locationService.Latitude, xmlLocation.Latitude, acceptableDifference)
-        || !Functions.IsMatchingValues(locationService.Longitude, xmlLocation.Longitude, acceptableDifference))
-    {
-        misMatchCountDictionary = Functions.MismatchCountIncrement(misMatchCountDictionary, xmlLocation.AtcoCode);
-
-        if (!Functions.IsMatchingValues(xmlLocation.Latitude, locationService.Latitude, acceptableDifference))
-        {
-            misMatchLatitudeCount = Functions.MismatchCountIncrement(misMatchLatitudeCount, xmlLocation.AtcoCode);
-            Log.Information(
-                $"MisMatching latitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Latitude value = {xmlLocation.Latitude}, Latitude = {locationService.Latitude}");
-        }
-
-        if (!Functions.IsMatchingValues(xmlLocation.Longitude, locationService.Longitude, acceptableDifference))
-        {
-            misMatchLongitudeCount = Functions.MismatchCountIncrement(misMatchLongitudeCount, xmlLocation.AtcoCode);
-            Log.Information(
-                $"MisMatching longitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Longitude value = {xmlLocation.Longitude}, Longitude = {locationService.Longitude}");
-        }
-    }
-}
+var mismatchedRecords = new MismatchedRecords();
+var misMatchModel = await mismatchedRecords.Process(xmlLocations);
 
 stopWatch.Stop();
 
-Log.Information($"Total count = {xmlLocations.Count}");
-Log.Information($"Total processed count = {totalProcessed}");
+Log.Information($"Total lat/long count from xml file = {xmlLocations.Count}");
+Log.Information($"Total processed count = {misMatchModel.TotalProcessed}");
 
-foreach (var key in misMatchCountDictionary.Keys)
+foreach (var key in misMatchModel.MisMatchCountDictionary.Keys)
 {
-    Log.Information($"AtcoCode: {key}. MismatchCount: {misMatchCountDictionary[key]}");
+    Log.Information($"AtcoCode: {key}. MismatchCount: {misMatchModel.MisMatchCountDictionary[key]}");
 }
 
-foreach (var key in misMatchLatitudeCount.Keys)
+foreach (var key in misMatchModel.MisMatchLatitudeCount.Keys)
 {
-    Log.Information($"AtcoCode: {key}. MismatchLatitudeCount: {misMatchLatitudeCount[key]}");
+    Log.Information($"AtcoCode: {key}. MismatchLatitudeCount: {misMatchModel.MisMatchLatitudeCount[key]}");
 }
 
-foreach (var key in misMatchLongitudeCount.Keys)
+foreach (var key in misMatchModel.MisMatchLongitudeCount.Keys)
 {
-    Log.Information($"AtcoCode: {key}. MismatchLongitudeCount: {misMatchLongitudeCount[key]}");
+    Log.Information($"AtcoCode: {key}. MismatchLongitudeCount: {misMatchModel.MisMatchLongitudeCount[key]}");
 }
 
 Log.Information($"Total time took to run the file = {stopWatch.Elapsed.Hours}h:{stopWatch.Elapsed.Minutes}m:{stopWatch.Elapsed.Seconds}s");

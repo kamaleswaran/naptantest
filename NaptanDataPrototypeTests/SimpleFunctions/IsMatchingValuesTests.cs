@@ -1,4 +1,5 @@
 using FluentAssertions;
+using NaptanDataPrototype.SimpleFunctions;
 using Xunit;
 
 namespace NaptanDataPrototypeTests.Functions;
@@ -10,7 +11,7 @@ public class IsMatchingValuesTests
     [InlineData(51.3202179, 51.32022)]
     public void ShouldMatchWithDefaultAdjustDifference(double val1, double val2)
     {
-        var result = NaptanDataPrototype.Functions.Functions.IsMatchingValues(val1, val2);
+        var result = Function.IsMatchingValues(val1, val2);
 
         result.Should().BeTrue();
     }
@@ -21,7 +22,7 @@ public class IsMatchingValuesTests
     [InlineData(51.3202179, 51.32021)]
     public void ShouldNotMatchWithDefaultAdjustDifference(double val1, double val2)
     {
-        var result = NaptanDataPrototype.Functions.Functions.IsMatchingValues(val1, val2);
+        var result = Function.IsMatchingValues(val1, val2);
 
         result.Should().BeFalse();
     }
@@ -32,7 +33,7 @@ public class IsMatchingValuesTests
     [InlineData(-0.06384, -0.06387, 0.00003)]
     public void ShouldMatchWhenGreaterThanOrEqualToAcceptableDifference(double val1, double val2, float acceptedDifference)
     {
-        var result = NaptanDataPrototype.Functions.Functions.IsMatchingValues(val1, val2, acceptedDifference);
+        var result = Function.IsMatchingValues(val1, val2, acceptedDifference);
 
         result.Should().BeTrue();
     }
@@ -42,7 +43,7 @@ public class IsMatchingValuesTests
     {
         var val1 = 10.00050;
         var val2 = 10.00010;
-        var result = NaptanDataPrototype.Functions.Functions.IsMatchingValues(val1, val2, 0.0001);
+        var result = Function.IsMatchingValues(val1, val2, 0.0001);
 
         result.Should().BeFalse();
     }

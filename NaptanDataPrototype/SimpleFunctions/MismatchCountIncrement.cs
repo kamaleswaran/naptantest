@@ -1,6 +1,6 @@
-namespace NaptanDataPrototype.Functions;
+namespace NaptanDataPrototype.SimpleFunctions;
 
-public static partial class Functions
+public static partial class Function
 {
     public static IDictionary<int, int> MismatchCountIncrement(IDictionary<int, int> misMatchCounts, int atcoCode)
     {
