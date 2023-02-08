@@ -46,6 +46,16 @@ public class NaptanReadXmlFileServiceTests
         naptonResponse[0].AtcoCode.Should().Be(400);
     }
     
+    [Fact]
+    public void ShouldNotGetInactiveStopPoints()
+    {
+        var naptanXmlFile = new NaptonXmlFileService();
+
+        var naptonResponse = naptanXmlFile.GetLocation(@"./Files/Naptan-oneStopPoint-inactive.xml");
+
+        naptonResponse.Count.Should().Be(0);
+    }
+    
     
     [Fact]
     public void ShouldGetAtcoCodeAndStopPointCounts()

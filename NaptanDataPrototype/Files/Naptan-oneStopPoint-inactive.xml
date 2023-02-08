@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NaPTAN xmlns="http://www.naptan.org.uk/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.naptan.org.uk/ http://www.naptan.org.uk/schema/2.4/NaPTAN.xsd" CreationDateTime="2022-12-13T13:46:57.004" ModificationDateTime="2022-12-13T13:46:57.004" Modification="new" RevisionNumber="0" FileName="NaPTAN149.xml" SchemaVersion="2.4" LocationSystem="WGS84">
+    <StopPoints>
+        <StopPoint CreationDateTime="2005-01-14T00:00:00.000" ModificationDateTime="2009-10-12T14:06:00.000" Modification="revise" RevisionNumber="4" Status="inactive">
+        <AtcoCode>40004404243B</AtcoCode>
+        <NaptanCode>surgmtwd</NaptanCode>
+        <Descriptor>
+            <CommonName>Tregarth Place</CommonName>
+            <Landmark>Clifton Way</Landmark>
+            <Street>Kirkland Avenue</Street>
+            <Indicator>opp</Indicator>
+        </Descriptor>
+        <Place>
+            <NptgLocalityRef>E0025895</NptgLocalityRef>
+            <Suburb>Goldsworth Park</Suburb>
+            <Town>Woking</Town>
+            <LocalityCentre>0</LocalityCentre>
+            <Location>
+                <Translation>
+                    <GridType>UKOS</GridType>
+                    <Easting>497900</Easting>
+                    <Northing>158836</Northing>
+                    <Longitude>-0.5965128</Longitude>
+                    <Latitude>51.3202179</Latitude>
+                </Translation>
+            </Location>
+        </Place>
+        <StopClassification>
+            <StopType>BCT</StopType>
+            <OnStreet>
+                <Bus>
+                    <BusStopType>MKD</BusStopType>
+                    <TimingStatus>OTH</TimingStatus>
+                    <MarkedPoint>
+                        <Bearing>
+                            <CompassPoint>S</CompassPoint>
+                            <Degrees>180</Degrees>
+                        </Bearing>
+                    </MarkedPoint>
+                </Bus>
+            </OnStreet>
+        </StopClassification>
+        <StopAreas>
+            <StopAreaRef Modification="new" Status="active">400G4404243A</StopAreaRef>
+        </StopAreas>
+        <AdministrativeAreaRef>102</AdministrativeAreaRef>
+        <PlusbusZones>
+            <PlusbusZoneRef CreationDateTime="2005-01-14T00:00:00.000" ModificationDateTime="2009-10-12T14:06:00.000" Modification="revise" RevisionNumber="4" Status="active">WOKING</PlusbusZoneRef>
+        </PlusbusZones>
+    </StopPoint>
+    </StopPoints>
+</NaPTAN>
