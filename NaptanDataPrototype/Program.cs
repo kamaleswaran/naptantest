@@ -11,7 +11,7 @@ Log.Logger = new LoggerConfiguration()
 var naptanData = new NaptonXmlFileService();
 
 Log.Information("Processing xml file...");
-var xmlLocations = naptanData.GetLocation(@"./Files/Brighton.xml");
+var xmlLocations = naptanData.GetLocation(@"./Files/NaPTAN.xml");
 
 Log.Information($"Xml file location loaded! Total xmlLocations count = {xmlLocations.Count}");
 
