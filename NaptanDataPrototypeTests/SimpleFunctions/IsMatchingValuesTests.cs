@@ -2,7 +2,7 @@ using FluentAssertions;
 using NaptanDataPrototype.SimpleFunctions;
 using Xunit;
 
-namespace NaptanDataPrototypeTests.Functions;
+namespace NaptanDataPrototypeTests.SimpleFunctions;
 
 public class IsMatchingValuesTests
 {

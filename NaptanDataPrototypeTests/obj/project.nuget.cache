@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/XCz/2zUpMn3/hZIUkmWN6sOizbpbkRAQ7deJQ89VJTteuuxXxCiLNu/iZLahKVERUIg5Oqw0sTCw2dHT8iY6Q==",
+  "dgSpecHash": "pbagvSf2g4lhOPdXV+zUZalSn+O8uuwo2GIlV8phY7ULNocUt8+giZrNE4dZc2b8yeP9P5lQ1T/Ag14Q8RBIzw==",
   "success": true,
   "projectFilePath": "/Users/kamaleswaransangarapandian/Projects/NaptanDataPrototype/NaptanDataPrototypeTests/NaptanDataPrototypeTests.csproj",
   "expectedPackageFiles": [
@@ -96,7 +96,9 @@
     "/Users/kamaleswaransangarapandian/.nuget/packages/xunit.assert/2.4.2/xunit.assert.2.4.2.nupkg.sha512",
     "/Users/kamaleswaransangarapandian/.nuget/packages/xunit.core/2.4.2/xunit.core.2.4.2.nupkg.sha512",
     "/Users/kamaleswaransangarapandian/.nuget/packages/xunit.extensibility.core/2.4.2/xunit.extensibility.core.2.4.2.nupkg.sha512",
-    "/Users/kamaleswaransangarapandian/.nuget/packages/xunit.extensibility.execution/2.4.2/xunit.extensibility.execution.2.4.2.nupkg.sha512"
+    "/Users/kamaleswaransangarapandian/.nuget/packages/xunit.extensibility.execution/2.4.2/xunit.extensibility.execution.2.4.2.nupkg.sha512",
+    "/Users/kamaleswaransangarapandian/.nuget/packages/microsoft.netcore.app.ref/6.0.13/microsoft.netcore.app.ref.6.0.13.nupkg.sha512",
+    "/Users/kamaleswaransangarapandian/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.13/microsoft.aspnetcore.app.ref.6.0.13.nupkg.sha512"
   ],
   "logs": []
 }

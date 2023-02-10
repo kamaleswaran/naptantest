@@ -9,4 +9,8 @@ public class MismatchResponseModel
     public IDictionary<int, int> MisMatchLatitudeCount { get; set; }
     
     public IDictionary<int, int> MisMatchLongitudeCount { get; set; }
+
+    public List<double> MisMatchLatitude { get; set; }
+    
+    public List<double> MisMatchLongitude { get; set; }
 }

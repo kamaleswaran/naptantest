@@ -13,7 +13,10 @@ public class MismatchedRecords
     IDictionary<int, int> _misMatchCountDictionary = new Dictionary<int, int>();
     IDictionary<int, int> _misMatchLatitudeCount = new Dictionary<int, int>();
     IDictionary<int, int> _misMatchLongitudeCount = new Dictionary<int, int>();
-    
+
+    private List<double> _misMatchLatitude = new List<double>();
+    private List<double> _misMatchLongitude = new List<double>();
+
     public async Task<MismatchResponseModel> Process(List<NaptanModel> naptanModels)
     {
         var bng2latlongService = new OsToLatLongService();
@@ -34,16 +37,22 @@ public class MismatchedRecords
 
                 if (!Function.IsMatchingValues(xmlLocation.Latitude, locationService.Latitude, acceptableDifference))
                 {
-                    _misMatchLatitudeCount = Function.MismatchCountIncrement(_misMatchLatitudeCount, xmlLocation.AtcoCode);
-                    Log.Information(
-                        $"MisMatching latitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Latitude value = {xmlLocation.Latitude}, Latitude = {locationService.Latitude}");
+                    // _misMatchLatitudeCount = Function.MismatchCountIncrement(_misMatchLatitudeCount, xmlLocation.AtcoCode);
+                    // Log.Information(
+                    //     $"MisMatching latitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Latitude value = {xmlLocation.Latitude}, Latitude = {locationService.Latitude}");
+
+                    var difference = Function.FindDifference(xmlLocation.Latitude, locationService.Latitude);
+                    _misMatchLatitude.Add(difference);
                 }
                 
                 if (!Function.IsMatchingValues(xmlLocation.Longitude, locationService.Longitude, acceptableDifference))
                 {
-                    _misMatchLongitudeCount = Function.MismatchCountIncrement(_misMatchLongitudeCount, xmlLocation.AtcoCode);
-                    Log.Information(
-                        $"MisMatching longitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Longitude value = {xmlLocation.Longitude}, Longitude = {locationService.Longitude}");
+                    // _misMatchLongitudeCount = Function.MismatchCountIncrement(_misMatchLongitudeCount, xmlLocation.AtcoCode);
+                    // Log.Information(
+                    //     $"MisMatching longitude. XML AtcoCode = {xmlLocation.AtcoCode}, XML Longitude value = {xmlLocation.Longitude}, Longitude = {locationService.Longitude}");
+
+                    var difference = Function.FindDifference(xmlLocation.Longitude, locationService.Longitude);
+                    _misMatchLongitude.Add(difference);
                 }
             }
         }
@@ -53,7 +62,9 @@ public class MismatchedRecords
             MisMatchCountDictionary = _misMatchCountDictionary,
             MisMatchLatitudeCount = _misMatchLatitudeCount,
             MisMatchLongitudeCount = _misMatchLongitudeCount,
-            TotalProcessed = totalProcessed
+            TotalProcessed = totalProcessed,
+            MisMatchLatitude = _misMatchLatitude,
+            MisMatchLongitude = _misMatchLongitude
         };
     }
 }
